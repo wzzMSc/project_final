@@ -161,3 +161,27 @@ for target in prediction_targets:
     df_down = pd.concat(df_concat)
     df_down.to_csv('data_pre/Downtime_'+target+'.csv',index=False)
 # %%
+path_data = "data/mcr"
+
+f_list = [join(path_data,f) for f in listdir(path_data) if isfile(join(path_data,f))]
+
+mcr_list = list()
+for f in f_list:
+    with open(f,'r',encoding='utf-8') as file:
+        date = ''
+        msg = list()
+        for line in file:
+            if line[0]!=' ':
+                if len(msg)!=0:
+                    mcr_list.append([date,msg])
+                    msg = list()
+                    date=parser.parse(line)
+                else:
+                    date=parser.parse(line)
+            else:
+                msg.append(line)
+
+mcr_df = pd.DataFrame(mcr_list,columns=['date','msg'])
+mcr_df.sort_values(by='date',ascending=True,inplace=True)
+mcr_df.to_csv('data_pre/mcr.csv',index=False)
+# %%

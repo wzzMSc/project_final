@@ -244,3 +244,12 @@ for target in prediction_targets:
     plt.close()
 
 # %%
+from wordcloud import WordCloud, STOPWORDS
+mcr = pd.read_csv('data_pre/mcr.csv',header=0,parse_dates=['date'],index_col=['date'])
+msgs = str(list(mcr['msg'].values)).replace('\n','').replace("'",'')
+cloud = WordCloud(background_color="white", width=1500, height=1000).generate(msgs)
+plt.axis("off")
+plt.imshow(cloud)
+plt.savefig("vis/wordcloud.png",dpi=500)
+
+# %%
