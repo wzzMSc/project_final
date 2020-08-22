@@ -8,7 +8,7 @@ df = pd.read_csv('data_pre/data_pre.csv',header=0,parse_dates=['ISODate'],index_
 
 prediction_targets = ['BEAMS','BEAMT','BEAMT2']
 
-resample_method = 'H'
+resample_method = '3H'
 df = df.resample(resample_method).mean()
 df.drop(labels=['FAA'],axis=1, inplace=True)
 
