@@ -67,17 +67,32 @@ for x in 'HOUR,DAY,WEEKDAY,MONTH,YEAR'.split(','):
     if not os.path.exists("vis/avg/"+x+'/'):
         os.makedirs("vis/avg/"+x+'/')
 
-def draw_plot(x,y,xlabel,ylabel,title,filename):
+df = pd.read_csv('data_pre/data_pre.csv',header=0,parse_dates=['ISODate'],index_col='ISODate')
+
+prediction_targets = ['BEAMS','BEAMT','BEAMT2']
+
+df.drop(labels=['FAA'],axis=1, inplace=True)
+
+
+def draw_plot(x,y,xlabel,ylabel,title,filename,data):
     plt.figure(figsize=(20,20))
-    sns_temp = sns.pointplot(data=df,x=x,y=y).set(xlabel=xlabel,ylabel=ylabel,title=title)
+    sns_temp = sns.pointplot(data=data,x=x,y=y).set(xlabel=xlabel,ylabel=ylabel,title=title)
     plt.savefig('vis/avg/'+x+'/'+filename+'.png',dpi=130)
     plt.cla()
     plt.close()
 
 for y in 'BEAMT,BEAMT2,BEAMS,BEAME1,MTEMP,MUONKICKER,HTEMP,TS1_TOTAL_YEST,TS1_TOTAL,REPR,REPR2,TS2_TOTAL,TS2_TOTAL_YEST'.split(','):
     for x in 'HOUR,DAY,WEEKDAY,MONTH,YEAR'.split(','):
-        draw_plot(x,y,x,y,x+'-'+y,x+'_'+y)
+        draw_plot(x,y,x,y,x+'-'+y,x+'_'+y,data=df)
 # %%
+df = pd.read_csv('data_pre/data_pre.csv',header=0,parse_dates=['ISODate'],index_col='ISODate')
+
+prediction_targets = ['BEAMS','BEAMT','BEAMT2']
+
+resample_method = '3H'
+df = df.resample(resample_method).mean()
+df.drop(labels=['FAA'],axis=1, inplace=True)
+
 for x in df.columns:
     if not os.path.exists("vis/scatter/"+x+'/'):
         os.makedirs("vis/scatter/"+x+'/')
