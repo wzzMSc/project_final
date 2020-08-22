@@ -41,7 +41,7 @@ for y in prediction_targets:
     plt.cla()
     plt.close()
 
-    print(y,'MSE:',mean_absolute_error(test[y],pred))
+    print(y,'MAE:',mean_absolute_error(test[y],pred))
 
 # %%
 dir = "vis/stat/02naive_mean/"
@@ -64,7 +64,7 @@ for y in prediction_targets:
     plt.cla()
     plt.close()
 
-    print(y,'MSE:',mean_absolute_error(test[y],pred))
+    print(y,'MAE:',mean_absolute_error(test[y],pred))
 
 # %%
 dir = "vis/stat/03rolling_mean/"
@@ -89,7 +89,7 @@ for y in prediction_targets:
     plt.cla()
     plt.close()
 
-    print(y,'MSE:',mean_absolute_error(test[y],pred))
+    print(y,'MAE:',mean_absolute_error(test[y],pred))
 
 # %%
 dir = "vis/stat/04single_exp/"
@@ -114,7 +114,7 @@ for y in prediction_targets:
     plt.cla()
     plt.close()
 
-    print(y,'MSE:',mean_absolute_error(test[y],test['SES']))
+    print(y,'MAE:',mean_absolute_error(test[y],test['SES']))
 # %%
 dir = "vis/stat/05holt/"
 
@@ -142,7 +142,7 @@ for y in prediction_targets:
     plt.cla()
     plt.close()
 
-    print(y,'MSE:',mean_absolute_error(test[y],test['holt']))
+    print(y,'MAE:',mean_absolute_error(test[y],test['holt']))
 # %%
 dir = "vis/stat/06holt_winter/"
 
@@ -165,6 +165,6 @@ for y in prediction_targets:
     plt.cla()
     plt.close()
 
-    print(y,'MSE:',mean_absolute_error(test[y],test['es']))
+    print(y,'MAE:',mean_absolute_error(test[y],test['es']))
 
 # %%
